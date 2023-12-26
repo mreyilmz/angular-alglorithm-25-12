@@ -22,6 +22,15 @@ export class AppComponent {
   aNumber: number = 0;
   numberOfDigits: number = 1;
 
+  inputPrimeNumber: number = 0;
+  primeNumberResult: string = '';
+
+  inputPalindrom: string = '';
+  palindromResult: string = '';
+
+  inputArmstrong: number = 0;
+  armstrongResult: boolean = true;
+
   faktoriyelHesaplama() {
     while (this.factorialNumber !== 0) {
       this.factorialResult *= this.factorialNumber;
@@ -49,5 +58,34 @@ export class AppComponent {
 
   resetCount() {
     this.numberOfDigits = 0;
+  }
+
+  isPrime() {
+    if (this.inputPrimeNumber <= 1) this.primeNumberResult = 'Not Prime';
+
+    if (this.inputPrimeNumber === 2) this.primeNumberResult = 'Prime';
+
+    for (let i = 3; i <= Math.sqrt(this.inputPrimeNumber); i++) {
+      if (this.inputPrimeNumber % i === 0) this.primeNumberResult = 'Not Prime';
+      else this.primeNumberResult = 'Prime';
+    }
+  }
+
+  isPalindrom() {
+    let reversedString = this.inputPalindrom.split('').reverse().join('');
+    if (reversedString === this.inputPalindrom)
+      this.palindromResult = 'İt is a palindrom';
+    else this.palindromResult = 'İt is NOT a palindrom';
+  }
+
+  isArmstrong() {
+    let digits = this.inputArmstrong.toString().split('');
+    let sum = 0;
+
+    for (let i = 0; i < digits.length; i++) {
+      sum += Math.pow(parseInt(digits[i]), digits.length);
+    }
+
+    return (this.armstrongResult = sum === this.inputArmstrong);
   }
 }
